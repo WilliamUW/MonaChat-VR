@@ -80,11 +80,11 @@ namespace WalletConnectUnity.Modal.Views
 
             base.Show(modal, effectCoroutine, options);
 
-#if (!UNITY_IOS && !UNITY_ANDROID && false)
+// #if (!UNITY_IOS && !UNITY_ANDROID && false)
             await ShowQrCodeAndCopyButtonAsync();
-#else
-            await GenerateUri();
-#endif
+// #else
+//             await GenerateUri();
+// #endif
 
             modal.Header.SetCustomLeftButton(_copyIconSprite, OnCopyLinkClick);
         }
