@@ -40,7 +40,7 @@ namespace WalletConnectUnity.Modal.Views
             }
             else
             {
-#if UNITY_IOS || UNITY_ANDROID
+#if UNITY_IOS
                 if (wallet is { MobileLink: not null })
                 {
                     if (_connectionTypeToPageDictionary.TryGetValue(ConnectionType.DeepLink, out var deepLinkPage))
