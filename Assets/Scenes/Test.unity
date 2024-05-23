@@ -6407,7 +6407,7 @@ GameObject:
   - component: {fileID: 621074354}
   - component: {fileID: 621074353}
   m_Layer: 0
-  m_Name: Test
+  m_Name: Duck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6451,12 +6451,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 621074352}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.96, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 971704014}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &624858285
 GameObject:
@@ -6997,8 +6997,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -6754674874353905211, guid: 00c9c177e828a57439e290aef2a23b3f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6754674874353905211, guid: 00c9c177e828a57439e290aef2a23b3f, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -4556973288927059552, guid: 00c9c177e828a57439e290aef2a23b3f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4556973288927059552, guid: 00c9c177e828a57439e290aef2a23b3f, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -7008,6 +7016,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: dcac969f335985b47a7dd104e05496d9, type: 2}
+    - target: {fileID: 426275973996910094, guid: 00c9c177e828a57439e290aef2a23b3f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 426275973996910094, guid: 00c9c177e828a57439e290aef2a23b3f, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -7033,8 +7045,16 @@ PrefabInstance:
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 2911963709810818730, guid: 00c9c177e828a57439e290aef2a23b3f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2911963709810818730, guid: 00c9c177e828a57439e290aef2a23b3f, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3801023212238101555, guid: 00c9c177e828a57439e290aef2a23b3f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3801023212238101555, guid: 00c9c177e828a57439e290aef2a23b3f, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -7052,6 +7072,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 042e972c6fce7414fbab2b5248e4a0fe, type: 2}
+    - target: {fileID: 7119876866639676220, guid: 00c9c177e828a57439e290aef2a23b3f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7119876866639676220, guid: 00c9c177e828a57439e290aef2a23b3f, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -8921,6 +8945,68 @@ MonoBehaviour:
   m_MinAngleAllowed: 0.1
   m_MaxAngleAllowed: 5
   m_TimeUntilThresholdReachesMaxAngle: 3
+--- !u!1 &808650232
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 808650234}
+  - component: {fileID: 808650233}
+  m_Layer: 0
+  m_Name: Chess
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &808650233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808650232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b781fe673a5534e91b1e802df4b9362e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  importSettings:
+    nodeNameMethod: 0
+    animationMethod: 1
+    generateMipMaps: 0
+    defaultMinFilterMode: 9729
+    defaultMagFilterMode: 9729
+    anisotropicFilterLevel: 1
+  url: https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/main/2.0/ABeautifulGame/glTF/ABeautifulGame.gltf
+  loadOnStartup: 1
+  sceneId: -1
+  playAutomatically: 1
+  streamingAsset: 0
+  instantiationSettings:
+    mask: -1
+    layer: 0
+    skinUpdateWhenOffscreen: 1
+    lightIntensityFactor: 1
+    sceneObjectCreation: 2
+--- !u!4 &808650234
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808650232}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 971704014}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &808812325
 GameObject:
   m_ObjectHideFlags: 0
@@ -9977,6 +10063,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 894369180}
   m_CullTransparentMesh: 1
+--- !u!1 &895040479
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 895040481}
+  - component: {fileID: 895040480}
+  m_Layer: 0
+  m_Name: Car
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &895040480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895040479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b781fe673a5534e91b1e802df4b9362e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  importSettings:
+    nodeNameMethod: 0
+    animationMethod: 1
+    generateMipMaps: 0
+    defaultMinFilterMode: 9729
+    defaultMagFilterMode: 9729
+    anisotropicFilterLevel: 1
+  url: https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/main/2.0/ToyCar/glTF/ToyCar.gltf
+  loadOnStartup: 1
+  sceneId: -1
+  playAutomatically: 1
+  streamingAsset: 0
+  instantiationSettings:
+    mask: -1
+    layer: 0
+    skinUpdateWhenOffscreen: 1
+    lightIntensityFactor: 1
+    sceneObjectCreation: 2
+--- !u!4 &895040481
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895040479}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.85, y: 0, z: 0}
+  m_LocalScale: {x: 50, y: 50, z: 50}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 971704014}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &896662536
 GameObject:
   m_ObjectHideFlags: 0
@@ -10619,6 +10767,40 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3, y: 0.6, z: 0.2}
   m_Center: {x: 0.000000059604645, y: -0.0000004824251, z: -0.000000009313229}
+--- !u!1 &971704013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 971704014}
+  m_Layer: 0
+  m_Name: Objects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &971704014
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971704013}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.96, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 621074354}
+  - {fileID: 895040481}
+  - {fileID: 808650234}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &976442729
 GameObject:
   m_ObjectHideFlags: 0
@@ -17225,6 +17407,10 @@ PrefabInstance:
       value: Torus Cut
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4ed41858240845b479082276b0831228, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4ed41858240845b479082276b0831228, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -18142,7 +18328,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.02e-43, y: 3e-45, z: 5.65e-42, w: 0}
+  m_BoundingSphereOverride: {x: 8.6e-43, y: 7.255069e-39, z: 1.0744892e-38, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -21211,7 +21397,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &2102629067
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -21407,6 +21593,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: a8211a3e0e87d014e8326e23ae022d39, type: 3}
       propertyPath: m_Name
       value: Arrows
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a8211a3e0e87d014e8326e23ae022d39, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1594145915397585993, guid: a8211a3e0e87d014e8326e23ae022d39, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -24466,4 +24656,4 @@ SceneRoots:
   - {fileID: 1783572214}
   - {fileID: 1565887663878291441}
   - {fileID: 1703568386}
-  - {fileID: 621074354}
+  - {fileID: 971704014}
