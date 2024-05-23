@@ -23,7 +23,7 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
     public void LoadGltfAssetsAndAddComponents(List<string> gltfUrls)
     {
-        for (int i = 0; i < gameObjectsWithMeshes.Count; i++)
+        for (int i = 0; i < gltfUrls.Count; i++)
         {
             var gameObject = gameObjectsWithMeshes[i];
             string gltfUrl = gltfUrls[i];

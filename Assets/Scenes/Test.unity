@@ -3967,7 +3967,6 @@ GameObject:
   m_Component:
   - component: {fileID: 286315168}
   - component: {fileID: 286315167}
-  - component: {fileID: 286315169}
   m_Layer: 0
   m_Name: ButtonInvoker
   m_TagString: Untagged
@@ -4008,24 +4007,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &286315169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 286315166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d3e8d94ff4890840bd962b6d729181d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameObjectsWithMeshes:
-  - {fileID: 1747197649}
-  - {fileID: 1574867978}
-  - {fileID: 621074352}
-  - {fileID: 895040479}
-  - {fileID: 808650232}
 --- !u!1 &295595497 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4618025148844850862, guid: af3a609f3b06600409a356f4e8ba91ba, type: 3}
@@ -12568,7 +12549,7 @@ GameObject:
   m_Component:
   - component: {fileID: 971704014}
   m_Layer: 0
-  m_Name: Objects
+  m_Name: Mona Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16501,7 +16482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c6984c48aed9a154294088f4265d8478, type: 3}
       propertyPath: m_Name
-      value: Spatial Panel Manipulator UI Examples
+      value: UI Panel
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c6984c48aed9a154294088f4265d8478, type: 3}
       propertyPath: m_IsActive
@@ -19185,7 +19166,7 @@ PrefabInstance:
     - target: {fileID: 7753147258609537286, guid: fa5ef3b56cfeb4f4ba855cdf2610a578, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 286315169}
+      objectReference: {fileID: 1697617336}
     - target: {fileID: 7753147258609537286, guid: fa5ef3b56cfeb4f4ba855cdf2610a578, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -21475,8 +21456,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectsWithMeshes:
-  - {fileID: 1747197649}
   - {fileID: 1574867978}
+  - {fileID: 1747197649}
   - {fileID: 621074352}
   - {fileID: 895040479}
   - {fileID: 808650232}
@@ -22526,7 +22507,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 6e-44, z: 4e-45, w: -2.8631067e-28}
+  m_BoundingSphereOverride: {x: 8.28e-43, y: -6.1001865e+30, z: 8.28e-43, w: 8.3e-44}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
