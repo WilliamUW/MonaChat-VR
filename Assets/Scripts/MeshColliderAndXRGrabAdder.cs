@@ -29,6 +29,7 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
                 var meshCollider = meshFilter.gameObject.AddComponent<MeshCollider>();
                 meshCollider.sharedMesh = meshFilter.sharedMesh;
                 meshCollider.convex = true;
+                meshFilter.gameObject.AddComponent<XRGrabInteractable>();
             }
         }
     }
