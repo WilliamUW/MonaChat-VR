@@ -1,10 +1,39 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using System.Collections.Generic;
-
+using GLTFast;
 public class MeshColliderAndXRGrabAdder : MonoBehaviour
 {
     public List<GameObject> gameObjectsWithMeshes; // Assign this list with your game objects
+    private List<string> gltfUrls = new List<string>
+    {
+        "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF/Duck.gltf",
+        "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/main/2.0/ToyCar/glTF/ToyCar.gltf",
+        "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/main/2.0/ABeautifulGame/glTF/ABeautifulGame.gltf",
+        "https://arweave.net/swKvgRBuTamdbuKgxmw3aiKqBMOJRHp_Hw8Qh9zGEF4",
+        "https://content.mona.gallery/y6l0ryaq-pjyl-fdj9-tlm1-xavgcotw.glb"
+    };
+
+    private void Start()
+    {
+        // Load GLTF assets and add components
+        LoadGltfAssetsAndAddComponents();
+    }
+
+    public void LoadGltfAssetsAndAddComponents()
+    {
+        for (int i = 0; i < gameObjectsWithMeshes.Count; i++)
+        {
+            var gameObject = gameObjectsWithMeshes[i];
+            string gltfUrl = gltfUrls[i];
+
+            if (gameObject != null && !string.IsNullOrEmpty(gltfUrl))
+            {
+                var gltf = gameObject.AddComponent<GLTFast.GltfAsset>();
+                gltf.Url = gltfUrl;
+            }
+        }
+    }
 
     public void AddCollidersAndInteractables()
     {
@@ -30,60 +59,6 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
                 meshCollider.sharedMesh = meshFilter.sharedMesh;
                 meshCollider.convex = true;
                 meshFilter.gameObject.AddComponent<XRGrabInteractable>();
-            }
-        }
-    }
-
-    public void AddCollidersAndInteractablesNotWorking()
-    {
-        foreach (var parentObject in gameObjectsWithMeshes)
-        {
-            // Ensure the parent object is not null
-            if (parentObject == null) continue;
-
-            // Add XRGrabInteractable to the parent object
-            if (parentObject.GetComponent<XRGrabInteractable>() == null)
-            {
-                parentObject.AddComponent<XRGrabInteractable>();
-            }
-
-            // Find all MeshFilter components in the children
-            var meshFilters = parentObject.GetComponentsInChildren<MeshFilter>();
-
-            // Create a list to store all the child meshes
-            List<Mesh> childMeshes = new List<Mesh>();
-
-            foreach (var meshFilter in meshFilters)
-            {
-                if (meshFilter == null || meshFilter.sharedMesh == null) continue;
-
-                // Add MeshCollider with convex enabled to each child
-                var meshCollider = meshFilter.gameObject.AddComponent<MeshCollider>();
-                meshCollider.sharedMesh = meshFilter.sharedMesh;
-                meshCollider.convex = true;
-
-                // Add the mesh to the list
-                childMeshes.Add(meshFilter.sharedMesh);
-            }
-
-            // Combine all child meshes into one mesh
-            if (childMeshes.Count > 0)
-            {
-                Mesh combinedMesh = new Mesh();
-                CombineInstance[] combine = new CombineInstance[childMeshes.Count];
-
-                for (int i = 0; i < childMeshes.Count; i++)
-                {
-                    combine[i].mesh = childMeshes[i];
-                    combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
-                }
-
-                combinedMesh.CombineMeshes(combine);
-
-                // Add MeshCollider to the parent object
-                var parentMeshCollider = parentObject.AddComponent<MeshCollider>();
-                parentMeshCollider.sharedMesh = combinedMesh;
-                parentMeshCollider.convex = true;
             }
         }
     }

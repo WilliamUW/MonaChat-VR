@@ -7774,7 +7774,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 621074354}
-  - component: {fileID: 621074353}
   m_Layer: 0
   m_Name: Duck
   m_TagString: Untagged
@@ -7782,36 +7781,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &621074353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 621074352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b781fe673a5534e91b1e802df4b9362e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  importSettings:
-    nodeNameMethod: 0
-    animationMethod: 1
-    generateMipMaps: 0
-    defaultMinFilterMode: 9729
-    defaultMagFilterMode: 9729
-    anisotropicFilterLevel: 1
-  url: https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF/Duck.gltf
-  loadOnStartup: 1
-  sceneId: -1
-  playAutomatically: 1
-  streamingAsset: 0
-  instantiationSettings:
-    mask: -1
-    layer: 0
-    skinUpdateWhenOffscreen: 1
-    lightIntensityFactor: 1
-    sceneObjectCreation: 2
 --- !u!4 &621074354
 Transform:
   m_ObjectHideFlags: 0
@@ -10545,7 +10514,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 808650234}
-  - component: {fileID: 808650233}
   m_Layer: 0
   m_Name: Chess
   m_TagString: Untagged
@@ -10553,36 +10521,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &808650233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 808650232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b781fe673a5534e91b1e802df4b9362e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  importSettings:
-    nodeNameMethod: 0
-    animationMethod: 1
-    generateMipMaps: 0
-    defaultMinFilterMode: 9729
-    defaultMagFilterMode: 9729
-    anisotropicFilterLevel: 1
-  url: https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/main/2.0/ABeautifulGame/glTF/ABeautifulGame.gltf
-  loadOnStartup: 1
-  sceneId: -1
-  playAutomatically: 1
-  streamingAsset: 0
-  instantiationSettings:
-    mask: -1
-    layer: 0
-    skinUpdateWhenOffscreen: 1
-    lightIntensityFactor: 1
-    sceneObjectCreation: 2
 --- !u!4 &808650234
 Transform:
   m_ObjectHideFlags: 0
@@ -11878,7 +11816,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 895040481}
-  - component: {fileID: 895040480}
   m_Layer: 0
   m_Name: Car
   m_TagString: Untagged
@@ -11886,36 +11823,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &895040480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 895040479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b781fe673a5534e91b1e802df4b9362e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  importSettings:
-    nodeNameMethod: 0
-    animationMethod: 1
-    generateMipMaps: 0
-    defaultMinFilterMode: 9729
-    defaultMagFilterMode: 9729
-    anisotropicFilterLevel: 1
-  url: https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/main/2.0/ToyCar/glTF/ToyCar.gltf
-  loadOnStartup: 1
-  sceneId: -1
-  playAutomatically: 1
-  streamingAsset: 0
-  instantiationSettings:
-    mask: -1
-    layer: 0
-    skinUpdateWhenOffscreen: 1
-    lightIntensityFactor: 1
-    sceneObjectCreation: 2
 --- !u!4 &895040481
 Transform:
   m_ObjectHideFlags: 0
@@ -14794,6 +14701,10 @@ PrefabInstance:
     - target: {fileID: 2775405142357048175, guid: 057b79a6bc70e4dcdbca1c90102b2de9, type: 3}
       propertyPath: m_Name
       value: MonaverseManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775405142357048175, guid: 057b79a6bc70e4dcdbca1c90102b2de9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7817789267564970899, guid: 057b79a6bc70e4dcdbca1c90102b2de9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20799,7 +20710,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1574867979}
-  - component: {fileID: 1574867980}
   m_Layer: 0
   m_Name: Car 2
   m_TagString: Untagged
@@ -20822,36 +20732,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 971704014}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &1574867980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1574867978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b781fe673a5534e91b1e802df4b9362e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  importSettings:
-    nodeNameMethod: 0
-    animationMethod: 1
-    generateMipMaps: 0
-    defaultMinFilterMode: 9729
-    defaultMagFilterMode: 9729
-    anisotropicFilterLevel: 1
-  url: https://content.mona.gallery/y6l0ryaq-pjyl-fdj9-tlm1-xavgcotw.glb
-  loadOnStartup: 1
-  sceneId: -1
-  playAutomatically: 1
-  streamingAsset: 0
-  instantiationSettings:
-    mask: -1
-    layer: 0
-    skinUpdateWhenOffscreen: 1
-    lightIntensityFactor: 1
-    sceneObjectCreation: 2
 --- !u!1 &1595563443
 GameObject:
   m_ObjectHideFlags: 0
@@ -21542,7 +21422,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1697617334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22174,7 +22054,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1747197650}
-  - component: {fileID: 1747197651}
   m_Layer: 0
   m_Name: Mecha
   m_TagString: Untagged
@@ -22197,36 +22076,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 971704014}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &1747197651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1747197649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b781fe673a5534e91b1e802df4b9362e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  importSettings:
-    nodeNameMethod: 0
-    animationMethod: 1
-    generateMipMaps: 0
-    defaultMinFilterMode: 9729
-    defaultMagFilterMode: 9729
-    anisotropicFilterLevel: 1
-  url: https://arweave.net/swKvgRBuTamdbuKgxmw3aiKqBMOJRHp_Hw8Qh9zGEF4
-  loadOnStartup: 1
-  sceneId: -1
-  playAutomatically: 1
-  streamingAsset: 0
-  instantiationSettings:
-    mask: -1
-    layer: 0
-    skinUpdateWhenOffscreen: 1
-    lightIntensityFactor: 1
-    sceneObjectCreation: 2
 --- !u!1 &1754699343
 GameObject:
   m_ObjectHideFlags: 0
