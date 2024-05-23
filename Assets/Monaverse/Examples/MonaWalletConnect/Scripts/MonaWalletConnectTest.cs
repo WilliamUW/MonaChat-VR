@@ -5,6 +5,7 @@ using Monaverse.Core;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 namespace Monaverse.Examples
 {
@@ -25,6 +26,8 @@ namespace Monaverse.Examples
         [Space] [SerializeField] private GameObject _dappButtons;
         [SerializeField] private GameObject _connectedState;
         [SerializeField] private GameObject _authorizedState;
+
+        // public MeshColliderAndXRGrabAdder meshColliderAndXRGrabAdder;
 
         private enum WalletState
         {
@@ -171,6 +174,36 @@ namespace Monaverse.Examples
             }
 
             _resultLabel.text = "Success: wallet collectible count: " + getCollectiblesResult.Data.TotalCount;
+
+            // get vrm asset urls
+            Debug.Log(getCollectiblesResult.Data);
+            Debug.Log(getCollectiblesResult.Data.Data);
+            Debug.Log(getCollectiblesResult.Data.Data[0]);
+            List<string> vrmAssetUrls = new List<string>();
+            foreach (var collectible in getCollectiblesResult.Data.Data)
+            {
+                Debug.Log(collectible.Versions);
+                Debug.Log(collectible.Versions[collectible.ActiveVersion]);
+                Debug.Log(collectible.Versions[collectible.ActiveVersion].Asset);
+                vrmAssetUrls.Add(collectible.Versions[collectible.ActiveVersion].Asset);
+                // const url = collectible.Versions[collectible.ActiveVersion].Asset;
+                // vrmAssetUrls.Add(url);
+            }
+
+            if (vrmAssetUrls.Count > 0)
+            {
+                _resultLabel.text += "\nVRM Assets:\n" + string.Join("\n", vrmAssetUrls);
+            }
+            else
+            {
+                _resultLabel.text += "\nNo VRM assets found.";
+            }
+
+            Debug.Log("[MonaWalletConnectTest] VRM Asset URLs: " + string.Join(", ", vrmAssetUrls));
+
+            var loader = GetComponent<MeshColliderAndXRGrabAdder>();
+                
+            loader.LoadGltfAssetsAndAddComponents(vrmAssetUrls);
         }
 
         #endregion

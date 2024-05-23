@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using System.Collections.Generic;
 using GLTFast;
+
 public class MeshColliderAndXRGrabAdder : MonoBehaviour
 {
     public List<GameObject> gameObjectsWithMeshes; // Assign this list with your game objects
@@ -17,10 +18,10 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
     private void Start()
     {
         // Load GLTF assets and add components
-        LoadGltfAssetsAndAddComponents();
+        // LoadGltfAssetsAndAddComponents();
     }
 
-    public void LoadGltfAssetsAndAddComponents()
+    public void LoadGltfAssetsAndAddComponents(List<string> gltfUrls)
     {
         for (int i = 0; i < gameObjectsWithMeshes.Count; i++)
         {
