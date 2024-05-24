@@ -112,7 +112,7 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
         {
             if (gameObject != null)
             {
-                StartCoroutine(MoveInSquarePattern(gameObject));
+                StartCoroutine(MoveRandomly(gameObject));
             }
         }
     }
@@ -175,12 +175,13 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
     }
 
-    private IEnumerator MoveInSquarePattern(GameObject obj)
+    private IEnumerator MoveRandomly(GameObject obj)
     {
-        Vector3[] directions = { Vector3.forward, Vector3.right, Vector3.back, Vector3.left };
-        int directionIndex = 0;
+        Vector3 originalPosition = obj.transform.position;
         float moveDistance = 2f;
-        float stopDuration = 1f;
+        float minWaitTime = 0.5f;
+        float maxWaitTime = 2f;
+        float moveSpeed = 0.5f; // Adjust to control the movement speed
 
         while (true)
         {
@@ -195,27 +196,47 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
             }
             else
             {
-                // Move in the current direction
-                Vector3 startPosition = obj.transform.position;
-                Vector3 endPosition = startPosition + directions[directionIndex] * moveDistance;
+                // Determine random direction and distance within range
+                Vector3 randomDirection = new Vector3(
+                    Random.Range(-1f, 1f),
+                    0,
+                    Random.Range(-1f, 1f)
+                ).normalized;
 
-                float elapsedTime = 0f;
-                while (elapsedTime < moveDistance)
+                float randomDistance = Random.Range(0.5f, moveDistance);
+                Vector3 targetPosition = obj.transform.position + randomDirection * randomDistance;
+
+                // Ensure the target position is within the allowed range from the original position
+                if (Vector3.Distance(targetPosition, originalPosition) > moveDistance)
                 {
-                    obj.transform.position = Vector3.Lerp(startPosition, endPosition, elapsedTime / moveDistance);
-                    elapsedTime += Time.deltaTime;
+                    targetPosition = originalPosition + (targetPosition - originalPosition).normalized * moveDistance;
+                }
+
+                // Rotate to face the target direction
+                Quaternion targetRotation = Quaternion.LookRotation(randomDirection);
+                while (Quaternion.Angle(obj.transform.rotation, targetRotation) > 0.1f)
+                {
+                    obj.transform.rotation = Quaternion.Slerp(obj.transform.rotation, targetRotation, Time.deltaTime * 2f);
                     yield return null;
                 }
 
-                // Wait for a while
-                yield return new WaitForSeconds(stopDuration);
+                // Move towards the target position
+                while (Vector3.Distance(obj.transform.position, targetPosition) > 0.1f)
+                {
+                    obj.transform.position = Vector3.MoveTowards(obj.transform.position, targetPosition, moveSpeed * Time.deltaTime);
+                    yield return null;
+                }
 
-                // Rotate to the next direction
-                obj.transform.Rotate(Vector3.up, 90f);
-                directionIndex = (directionIndex + 1) % 4;
+                // Ensure the final position is exactly the target position
+                obj.transform.position = targetPosition;
+
+                // Wait for a random duration before the next movement
+                float randomStopDuration = Random.Range(minWaitTime, maxWaitTime);
+                yield return new WaitForSeconds(randomStopDuration);
             }
         }
     }
+
 
     private void CheckClosestObject()
     {
