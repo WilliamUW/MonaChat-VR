@@ -17,7 +17,6 @@ Library: C:\Users\williamwang\GitHub\AssetStreaming\Temp\BurstOutput\tempburstli
 --assembly-defines=Microsoft.IdentityModel.Tokens;
 --assembly-defines=Monaverse.Api;
 --assembly-defines=Monaverse.Core;
---assembly-defines=Monaverse.Examples;
 --assembly-defines=Mono.Security;
 --assembly-defines=mscorlib;
 --assembly-defines=Nethereum.ABI;
@@ -158,7 +157,6 @@ Library: C:\Users\williamwang\GitHub\AssetStreaming\Temp\BurstOutput\tempburstli
 --assembly-defines=Microsoft.IdentityModel.Tokens;
 --assembly-defines=Monaverse.Api;
 --assembly-defines=Monaverse.Core;
---assembly-defines=Monaverse.Examples;
 --assembly-defines=Mono.Security;
 --assembly-defines=mscorlib;
 --assembly-defines=Nethereum.ABI;
@@ -253,7 +251,6 @@ Library: C:\Users\williamwang\GitHub\AssetStreaming\Temp\BurstOutput\tempburstli
 --assembly-defines=Microsoft.IdentityModel.Tokens;
 --assembly-defines=Monaverse.Api;
 --assembly-defines=Monaverse.Core;
---assembly-defines=Monaverse.Examples;
 --assembly-defines=Mono.Security;
 --assembly-defines=mscorlib;
 --assembly-defines=Nethereum.ABI;
