@@ -13,7 +13,7 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
     public Transform playerTransform; // Reference to the player's transform
     public Gemini gemini;
 
-    private List<CollectibleDto> collectibles; // Store the list of collectibles
+    private List<CollectibleDto> collectibles = new List<CollectibleDto>(); // Store the list of collectibles
     private GameObject currentClosestObject; // Track the current closest object
 
     private Dictionary<string, (Vector3 position, float scale)> positionScaleMap = new Dictionary<string, (Vector3 position, float scale)>()
@@ -29,6 +29,8 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
         { "Shrek", (new Vector3(15, 0f, 15), 0.01f) },
         { "Mario", (new Vector3(10, 0f, 20), 0.3f) },
     };
+
+    private string collectibleArtist = "Art";
 
     private void Start()
     {
@@ -75,6 +77,11 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
             // Debug: Print collectible details
             Debug.Log($"Processing collectible: {collectible.Title} {collectible.Artist}");
+
+            if (collectible.Artist != collectibleArtist) {
+                Debug.Log($"Skip: {collectible.Title} {collectible.Artist}");
+                continue;
+            }
 
             if (collectible.Versions == null || collectible.Versions.Count <= collectible.ActiveVersion)
             {
