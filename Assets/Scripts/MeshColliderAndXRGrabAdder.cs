@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using System.Collections.Generic;
 using GLTFast;
+using Monaverse.Api.Modules.Collectibles.Dtos; // Add this using directive
 
 public class MeshColliderAndXRGrabAdder : MonoBehaviour
 {
@@ -17,21 +18,20 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
     private void Start()
     {
-        // Load GLTF assets and add components
-        // LoadGltfAssetsAndAddComponents();
     }
 
-    public void LoadGltfAssetsAndAddComponents(List<string> gltfUrls)
+    public void LoadGltfAssetsAndAddComponents(List<CollectibleDto> collectibles)
     {
-        for (int i = 0; i < gltfUrls.Count; i++)
+        for (int i = 0; i < collectibles.Count; i++)
         {
             var gameObject = gameObjectsWithMeshes[i];
-            string gltfUrl = gltfUrls[i];
+            var collectible = collectibles[i];
+            var url = collectible.Versions[collectible.ActiveVersion].Asset;
 
-            if (gameObject != null && !string.IsNullOrEmpty(gltfUrl))
+            if (gameObject != null && !string.IsNullOrEmpty(url))
             {
-                var gltf = gameObject.AddComponent<GLTFast.GltfAsset>();
-                gltf.Url = gltfUrl;
+                var gltf = gameObject.AddComponent<GltfAsset>();
+                gltf.Url = url;
             }
         }
     }
@@ -62,11 +62,5 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
                 meshFilter.gameObject.AddComponent<XRGrabInteractable>();
             }
         }
-    }
-
-    // Call this method when your game objects are ready, such as after loading .glb files
-    public void OnMeshesLoaded()
-    {
-        AddCollidersAndInteractables();
     }
 }

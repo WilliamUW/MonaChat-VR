@@ -182,9 +182,7 @@ namespace Monaverse.Examples
             List<string> vrmAssetUrls = new List<string>();
             foreach (var collectible in getCollectiblesResult.Data.Data)
             {
-                Debug.Log(collectible.Versions);
-                Debug.Log(collectible.Versions[collectible.ActiveVersion]);
-                Debug.Log(collectible.Versions[collectible.ActiveVersion].Asset);
+                Debug.Log(collectible);
                 vrmAssetUrls.Add(collectible.Versions[collectible.ActiveVersion].Asset);
                 // const url = collectible.Versions[collectible.ActiveVersion].Asset;
                 // vrmAssetUrls.Add(url);
@@ -203,7 +201,7 @@ namespace Monaverse.Examples
 
             var loader = GetComponent<MeshColliderAndXRGrabAdder>();
                 
-            loader.LoadGltfAssetsAndAddComponents(vrmAssetUrls);
+            loader.LoadGltfAssetsAndAddComponents(getCollectiblesResult.Data.Data);
         }
 
         #endregion
