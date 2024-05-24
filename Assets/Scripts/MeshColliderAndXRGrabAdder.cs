@@ -131,7 +131,7 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
     {
         // Implement your logic to initialize Gemini with the selected asset's title and description
         Debug.Log($"Initializing Gemini with Title: {title} and Description: {description}");
-        gemini.InitializeGemini("Name: " + title + ". Description: " + description);
+        gemini.InitializeGemini("Name: " + title + ". Description: " + description, title);
     }
 
     public void AddCollidersAndInteractables()
@@ -189,6 +189,13 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
             {
                 // Pause movement and face the player
                 Vector3 directionToPlayer = (playerTransform.position - obj.transform.position).normalized;
+
+                // Zero out the y-component to only rotate around the y-axis
+                directionToPlayer.y = 0;
+
+                // Normalize the direction vector again after modification
+                directionToPlayer = directionToPlayer.normalized;
+
                 Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
                 obj.transform.rotation = Quaternion.Slerp(obj.transform.rotation, lookRotation, Time.deltaTime * 2f);
 

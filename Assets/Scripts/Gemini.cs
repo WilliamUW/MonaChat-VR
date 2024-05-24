@@ -34,11 +34,12 @@ public class Gemini : MonoBehaviour
 
     private void Start()
     {
-        InitializeGemini("Pretend you are the Statue of Liberty.");
+        InitializeGemini("You are a helpful assistant.");
     }
 
-    public void InitializeGemini(string initialPrompt)
+    public void InitializeGemini(string initialPrompt, string name="Gemini")
     {
+        Speak("Hello, I am " + name + "!");
         conversation = new List<Dictionary<string, object>>
         {
             new Dictionary<string, object>
