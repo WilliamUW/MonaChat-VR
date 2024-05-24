@@ -247,7 +247,11 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
         {
             if (obj == null) continue;
 
-            float distance = Vector3.Distance(obj.transform.position, playerTransform.position);
+            // Calculate the distance on the x and z coordinates only
+            Vector3 objPositionXZ = new Vector3(obj.transform.position.x, 0, obj.transform.position.z);
+            Vector3 playerPositionXZ = new Vector3(playerTransform.position.x, 0, playerTransform.position.z);
+            float distance = Vector3.Distance(objPositionXZ, playerPositionXZ);
+
             if (distance < closestDistance)
             {
                 closestDistance = distance;
@@ -257,6 +261,7 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
         if (closestObject != null && closestObject != currentClosestObject && closestDistance <= 3f)
         {
+            Debug.Log($"Closest object: {closestObject.name} at distance: {closestDistance}");
             currentClosestObject = closestObject;
 
             int index = gameObjectsWithMeshes.IndexOf(currentClosestObject);
