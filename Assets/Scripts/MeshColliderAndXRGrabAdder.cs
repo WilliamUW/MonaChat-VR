@@ -3,18 +3,21 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using GLTFast;
 using Monaverse.Api.Modules.Collectibles.Dtos;
+using TMPro; // Required for TextMeshPro interaction
 
 public class MeshColliderAndXRGrabAdder : MonoBehaviour
 {
     public List<GameObject> gameObjectsWithMeshes; // Assign this list with your game objects
+    public TMP_Dropdown collectiblesDropdown; // Reference to the TMP Dropdown
+
     private Dictionary<string, (Vector3 position, float scale)> positionScaleMap = new Dictionary<string, (Vector3 position, float scale)>()
-        {
-            { "Statue of Liberty", (new Vector3(13, -16, 3), 0.5f) },
-            { "XB-21", (new Vector3(-2, 8f, -20), 0.2f) },
-            { "The Thinker", (new Vector3(-5, 1f, 0), 3f) },
-            { "Car", (new Vector3(0, 1f, 4), 1f) },
-            { "Mona Lisa", (new Vector3(5, 1.5f, 0), 1f) }
-        };
+    {
+        { "Statue of Liberty", (new Vector3(13, -16, 3), 0.5f) },
+        { "XB-21", (new Vector3(-2, 8f, -20), 0.2f) },
+        { "The Thinker", (new Vector3(-5, 1f, 0), 3f) },
+        { "Car", (new Vector3(0, 1f, 4), 1f) },
+        { "Mona Lisa", (new Vector3(5, 1.5f, 0), 1f) }
+    };
 
     private void Start()
     {
@@ -31,6 +34,11 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
         Debug.Log($"Collectibles count: {collectibles.Count}");
 
+        // Clear the dropdown options first
+        collectiblesDropdown.ClearOptions();
+
+        List<string> dropdownOptions = new List<string>();
+
         for (int i = 0; i < collectibles.Count; i++)
         {
             // Debug: Ensure gameObjectsWithMeshes list is not null and contains expected items
@@ -42,6 +50,9 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
             var gameObject = gameObjectsWithMeshes[i];
             var collectible = collectibles[i];
+
+            // Add title to the dropdown options
+            dropdownOptions.Add(collectible.Title);
 
             // Debug: Print collectible details
             Debug.Log($"Processing collectible: {collectible.Title}");
@@ -75,6 +86,9 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
                 }
             }
         }
+
+        // Add options to the dropdown
+        collectiblesDropdown.AddOptions(dropdownOptions);
     }
 
     public void AddCollidersAndInteractables()
@@ -111,7 +125,7 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
                 childGrabInteractable.onSelectEntered.AddListener((XRBaseInteractor interactor) =>
                 {
-                    Debug.Log($"Grabbed object: {parentObject.name}");
+                    Debug.Log($"Grabbed object: {meshFilter.gameObject.name}");
                 });
             }
         }
