@@ -18,12 +18,16 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
     private Dictionary<string, (Vector3 position, float scale)> positionScaleMap = new Dictionary<string, (Vector3 position, float scale)>()
     {
-        { "Statue of Liberty", (new Vector3(13, -18, 3), 0.5f) },
-        { "XB-21", (new Vector3(-2, 7f, -20), 0.2f) },
-        { "The Thinker", (new Vector3(-5, 0f, 0), 3f) },
-        { "Car", (new Vector3(5, 0.4f, 5), 1f) },
-        { "Mona Lisa", (new Vector3(5, 1.9f, 0), 1f) },
-        { "Santa Claus", (new Vector3(0, 0f, 5), 0.7f) }
+        { "Statue of Liberty", (new Vector3(13, -18, 3), 0.1f) },
+        { "XB-21", (new Vector3(-2, 7f, -10), 0.2f) },
+        { "The Thinker", (new Vector3(-5, 0f, 5), 2f) },
+        { "Car", (new Vector3(10, 0.4f, 15), 1f) },
+        { "Mona Lisa", (new Vector3(5, 1.9f, 5), 1f) },
+        { "Santa Claus", (new Vector3(10, 0f, 5), 0.7f) },
+        { "Spongebob", (new Vector3(5, 0f, 5), 0.003f) },
+        { "Pikachu", (new Vector3(10, 0f, 5), 0.03f) },
+        { "Shrek", (new Vector3(15, 0f, 15), 0.01f) },
+        { "Mario", (new Vector3(10, 0f, 20), 0.3f) },
     };
 
     private void Start()
@@ -70,7 +74,7 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
             dropdownOptions.Add(collectible.Title);
 
             // Debug: Print collectible details
-            Debug.Log($"Processing collectible: {collectible.Title}");
+            Debug.Log($"Processing collectible: {collectible.Title} {collectible.Artist}");
 
             if (collectible.Versions == null || collectible.Versions.Count <= collectible.ActiveVersion)
             {
@@ -96,7 +100,7 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
                 else
                 {
                     // Default position and scale
-                    gameObject.transform.position = Vector3.zero;
+                    gameObject.transform.position = new Vector3(0, 0f, 10);
                     gameObject.transform.localScale = Vector3.one;
                 }
             }
