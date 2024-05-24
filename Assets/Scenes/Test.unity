@@ -3167,8 +3167,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 237237132}
-        m_TargetAssemblyTypeName: MainController, Assembly-CSharp
-        m_MethodName: palmUpEnd
+        m_TargetAssemblyTypeName: Gemini, Assembly-CSharp
+        m_MethodName: PalmUpEnd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3537,7 +3537,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 237237131}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e79a1a9d9c02e8418eb873f34c8d43a, type: 3}
+  m_Script: {fileID: 11500000, guid: d782d65e5a29e1247b4980c086f82173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   textToSpeechInputTextField: {fileID: 1450638272}
@@ -28818,11 +28818,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7753147258609537286, guid: fa5ef3b56cfeb4f4ba855cdf2610a578, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: palmUpEnter
+      value: PalmUpEnter
       objectReference: {fileID: 0}
     - target: {fileID: 7753147258609537286, guid: fa5ef3b56cfeb4f4ba855cdf2610a578, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MainController, Assembly-CSharp
+      value: Gemini, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7753147258609537286, guid: fa5ef3b56cfeb4f4ba855cdf2610a578, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName

@@ -1,82 +1,77 @@
-using System.Collections;
-using UnityEngine;
-using UnityEngine.UI; // Required for UI Button interaction
-using TMPro; // Required for TextMeshPro interaction
 using System;
-using static UnityEngine.Rendering.DebugUI;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
-using System.Xml;
 using System.Threading.Tasks;
-using Newtonsoft;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Collections.Specialized;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Networking;
-using System.Collections;
-using System.Text;
-using Newtonsoft.Json;
+using UnityEngine.UI; // Required for UI Button interaction
 using Meta.Voice.Samples.Dictation;
-using System.Reflection;
-using Button = UnityEngine.UI.Button;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-public class Gemini
+
+public class Gemini : MonoBehaviour
 {
-    MethodInfo onClickMethod = typeof(Button).GetMethod("Press", BindingFlags.NonPublic | BindingFlags.Instance);
+    private MethodInfo onClickMethod = typeof(Button).GetMethod("Press", BindingFlags.NonPublic | BindingFlags.Instance);
 
     public UnityEngine.UI.InputField textToSpeechInputTextField;
     public Button textToSpeechStartButton; // Reference to the UI Button
     public Button textToSpeechStopButton; // Reference to the UI Button
 
+    public DictationActivation controller; // Assign this in the Inspector
+    public UnityEngine.UI.Button clearButton;
+    public TextMeshProUGUI transcriptionText; // Reference to the TextMeshPro UI component on the button
+
     private List<Dictionary<string, object>> conversation = new List<Dictionary<string, object>>();
     private string geminiApiKey = "AIzaSyBxjY0ZtQ3Rw4xedwZIrCscne2PZxagCmc";
     private string url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent";
 
-    public Gemini(string initialPrompt, UnityEngine.UI.InputField textToSpeechInputTextField, Button textToSpeechStartButton)
+    private bool isListening = false;
+
+    private void Start()
     {
-        this.textToSpeechInputTextField = textToSpeechInputTextField;
-        this.textToSpeechStartButton = textToSpeechStartButton;
-
-        // speak("Hi there! Let me introduce myself.");
-
-        conversation = new List<Dictionary<string, object>>();
-        conversation.Add(new Dictionary<string, object>
-                {
-                    { "role", "user" },
-                    { "parts", new List<object>
-                        {
-                            new { text = "Answer in first person as if you are without any prefix: " + initialPrompt },
-                        }
-                    }
-                });
-        conversation.Add(new Dictionary<string, object>
-                {
-                    { "role", "model" },
-                    { "parts", new List<object>
-                        {
-                            new { text = "Ok." },
-                        }
-                    }
-                });
-
+        InitializeGemini("Pretend you are the Mona Lisa.");
     }
 
-    public void speak(string text)
+    public void InitializeGemini(string initialPrompt)
+    {
+        conversation = new List<Dictionary<string, object>>
+        {
+            new Dictionary<string, object>
+            {
+                { "role", "user" },
+                { "parts", new List<object>
+                    {
+                        new { text = "Answer in first person as if you are without any prefix: " + initialPrompt },
+                    }
+                }
+            },
+            new Dictionary<string, object>
+            {
+                { "role", "model" },
+                { "parts", new List<object>
+                    {
+                        new { text = "Ok." },
+                    }
+                }
+            }
+        };
+    }
+
+    public void Speak(string text)
     {
         Debug.Log("Speak: " + text);
         textToSpeechInputTextField.text = text;
         onClickMethod?.Invoke(textToSpeechStartButton, null);
     }
 
-    public void updateCaptureButtonText(string s)
+    public void UpdateCaptureButtonText(string s)
     {
         Debug.Log(s);
     }
+
     public async void AskGemini(string userQuery, bool resetConversation = false, bool announceQuestion = true)
     {
         if (string.IsNullOrWhiteSpace(userQuery))
@@ -85,8 +80,7 @@ public class Gemini
         }
         if (announceQuestion)
         {
-            speak("I heard: " + userQuery);
-            // updateCaptureButtonText("I heard: " + userQuery);
+            Speak("I heard: " + userQuery);
         }
         var url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent";
 
@@ -100,29 +94,24 @@ public class Gemini
             client.BaseAddress = new Uri(url);
             var requestUri = $"?key={geminiApiKey}";
 
-            // Append user response to the conversation history
             conversation.Add(new Dictionary<string, object>
-                {
-                    { "role", "user" },
-                    { "parts", new List<object>
-                        {
-                            new { text = userQuery },
-                        }
+            {
+                { "role", "user" },
+                { "parts", new List<object>
+                    {
+                        new { text = userQuery },
                     }
-                });
+                }
+            });
 
             Debug.Log(JsonConvert.SerializeObject(conversation, Newtonsoft.Json.Formatting.Indented));
             var safetySettings = new List<object>
-                {
-                    new { category = "HARM_CATEGORY_HARASSMENT", threshold = "BLOCK_NONE" },
-                    new { category = "HARM_CATEGORY_HATE_SPEECH", threshold = "BLOCK_NONE" },
-                    new { category = "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold = "BLOCK_NONE" },
-                    new { category = "HARM_CATEGORY_DANGEROUS_CONTENT", threshold = "BLOCK_NONE" }
-                };
-
-
-
-            // Existing objects: conversation and safetySettings
+            {
+                new { category = "HARM_CATEGORY_HARASSMENT", threshold = "BLOCK_NONE" },
+                new { category = "HARM_CATEGORY_HATE_SPEECH", threshold = "BLOCK_NONE" },
+                new { category = "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold = "BLOCK_NONE" },
+                new { category = "HARM_CATEGORY_DANGEROUS_CONTENT", threshold = "BLOCK_NONE" }
+            };
 
             var requestBody = new
             {
@@ -131,7 +120,6 @@ public class Gemini
             };
             Debug.Log(JsonConvert.SerializeObject(requestBody, Newtonsoft.Json.Formatting.Indented));
 
-            // Serialize the payload
             var conversationJson = JsonConvert.SerializeObject(requestBody, Newtonsoft.Json.Formatting.None);
             HttpContent content = new StringContent(conversationJson, Encoding.UTF8, "application/json");
 
@@ -145,21 +133,13 @@ public class Gemini
                 JObject jsonResponse = JObject.Parse(responseBody);
                 Debug.Log(jsonResponse);
 
-                // string extractedText = (string)jsonResponse["candidates"][0]["content"]["parts"][0]["text"];
-
-                // Attempt to extract text directly
                 JToken jtokenResponse = jsonResponse["candidates"][0]["content"]["parts"][0]["text"];
 
                 if (jtokenResponse != null)
                 {
                     string extractedText = jtokenResponse.ToString();
-
                     Debug.Log("Extracted Text: " + extractedText);
 
-
-                    // Parse and handle model response here if necessary
-                    // Example: Append model response to the conversation
-                    // This is a placeholder. You need to extract actual response from responseBody JSON.
                     conversation.Add(new Dictionary<string, object>
                     {
                         { "role", "model" },
@@ -174,25 +154,18 @@ public class Gemini
 
                     if (extractedText != null)
                     {
-                        speak(extractedText);
+                        Speak(extractedText);
                     }
                 }
                 else
                 {
-                    // Check if there is a function call
                     JToken functionCall = jsonResponse["candidates"][0]["content"]["parts"][0]["functionCall"];
                     if (functionCall != null)
                     {
                         string functionName = (string)functionCall["name"];
                         JObject args = (JObject)functionCall["args"];
 
-                        // Based on function name, call the relevant method
                         Debug.Log($"Function Call Detected: {functionName}");
-                        // ExecuteFunctionCall(functionName, args);
-                        //if (functionName == "change_size")
-                        //{
-                        //    change_size(functionCall["args"]["magnitude"].ToString(), functionCall["args"]["body"].ToString());
-                        //}
                     }
                     else
                     {
@@ -207,5 +180,27 @@ public class Gemini
                 Debug.Log("Message :{0} " + e.Message);
             }
         }
+    }
+
+    public void PalmUpEnter()
+    {
+        if (isListening) return;
+        isListening = true;
+        Debug.Log("Listen start");
+        onClickMethod?.Invoke(clearButton, null);
+        onClickMethod?.Invoke(textToSpeechStopButton, null);
+        controller.ToggleActivation();
+        Debug.Log("Listening...");
+    }
+
+    public void PalmUpEnd()
+    {
+        if (!isListening) return;
+        isListening = false;
+        Debug.Log("Listen end");
+        string user_input = transcriptionText.text;
+        AskGemini(user_input);
+        Debug.Log("Asking ... " + user_input);
+        controller.ToggleActivation();
     }
 }
