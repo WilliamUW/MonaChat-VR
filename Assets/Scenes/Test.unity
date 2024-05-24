@@ -17742,7 +17742,7 @@ GameObject:
   - component: {fileID: 1146431771}
   - component: {fileID: 1146431770}
   m_Layer: 5
-  m_Name: Canvas (1)
+  m_Name: TTS UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19501,6 +19501,11 @@ MonoBehaviour:
   m_SnapCollider: {fileID: 1241451259}
   m_DisableSnapColliderWhenSelected: 1
   m_SnapToCollider: {fileID: 0}
+--- !u!4 &1244154765 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2871854915733156396, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
+  m_PrefabInstance: {fileID: 1825262782}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1246551744
 GameObject:
   m_ObjectHideFlags: 0
@@ -26077,7 +26082,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1697617334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26138,6 +26143,7 @@ MonoBehaviour:
   - {fileID: 811379334}
   - {fileID: 1152600407}
   collectiblesDropdown: {fileID: 853429181}
+  playerTransform: {fileID: 1244154765}
   gemini: {fileID: 237237132}
 --- !u!224 &1700917881 stripped
 RectTransform:
@@ -27420,7 +27426,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 4.9e-44, y: 6e-45, z: 1.3e-44, w: -6.6863656e+30}
+  m_BoundingSphereOverride: {x: 1.02e-43, y: 1e-44, z: 2.4987e-41, w: 12099.25}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -35498,14 +35504,14 @@ SceneRoots:
   - {fileID: 286315168}
   - {fileID: 1148717779}
   - {fileID: 1261284097}
+  - {fileID: 237237133}
   - {fileID: 1519239115}
   - {fileID: 1030001759}
   - {fileID: 281232336}
   - {fileID: 345928204}
   - {fileID: 1681064168}
-  - {fileID: 1146431773}
   - {fileID: 1442527111}
+  - {fileID: 1146431773}
   - {fileID: 341293447}
   - {fileID: 1973225369}
   - {fileID: 355028734}
-  - {fileID: 237237133}

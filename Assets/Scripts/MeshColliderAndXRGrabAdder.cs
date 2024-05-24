@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -9,10 +10,11 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 {
     public List<GameObject> gameObjectsWithMeshes; // Assign this list with your game objects
     public TMP_Dropdown collectiblesDropdown; // Reference to the TMP Dropdown
+    public Transform playerTransform; // Reference to the player's transform
+    public Gemini gemini;
 
     private List<CollectibleDto> collectibles; // Store the list of collectibles
-
-    public Gemini gemini;
+    private GameObject currentClosestObject; // Track the current closest object
 
     private Dictionary<string, (Vector3 position, float scale)> positionScaleMap = new Dictionary<string, (Vector3 position, float scale)>()
     {
@@ -23,6 +25,14 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
         { "Mona Lisa", (new Vector3(5, 1.5f, 0), 1f) }
     };
 
+    private void Start()
+    {
+    }
+
+    private void Update()
+    {
+        CheckClosestObject();
+    }
 
     public void LoadGltfAssetsAndAddComponents(List<CollectibleDto> collectibles)
     {
@@ -93,7 +103,18 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
         // Add options to the dropdown
         collectiblesDropdown.AddOptions(dropdownOptions);
+
+        // Add listener to the dropdown for handling selection changes
         collectiblesDropdown.onValueChanged.AddListener(OnDropdownValueChanged);
+
+        // Start movement sequence for each game object
+        foreach (var gameObject in gameObjectsWithMeshes)
+        {
+            if (gameObject != null)
+            {
+                StartCoroutine(MoveInSquarePattern(gameObject));
+            }
+        }
     }
 
     private void OnDropdownValueChanged(int index)
@@ -149,6 +170,79 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
                 {
                     Debug.Log($"Grabbed object: {meshFilter.gameObject.name}");
                 });
+            }
+        }
+
+    }
+
+    private IEnumerator MoveInSquarePattern(GameObject obj)
+    {
+        Vector3[] directions = { Vector3.forward, Vector3.right, Vector3.back, Vector3.left };
+        int directionIndex = 0;
+        float moveDistance = 2f;
+        float stopDuration = 1f;
+
+        while (true)
+        {
+            if (Vector3.Distance(obj.transform.position, playerTransform.position) <= 3f)
+            {
+                // Pause movement and face the player
+                Vector3 directionToPlayer = (playerTransform.position - obj.transform.position).normalized;
+                Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
+                obj.transform.rotation = Quaternion.Slerp(obj.transform.rotation, lookRotation, Time.deltaTime * 2f);
+
+                yield return null;
+            }
+            else
+            {
+                // Move in the current direction
+                Vector3 startPosition = obj.transform.position;
+                Vector3 endPosition = startPosition + directions[directionIndex] * moveDistance;
+
+                float elapsedTime = 0f;
+                while (elapsedTime < moveDistance)
+                {
+                    obj.transform.position = Vector3.Lerp(startPosition, endPosition, elapsedTime / moveDistance);
+                    elapsedTime += Time.deltaTime;
+                    yield return null;
+                }
+
+                // Wait for a while
+                yield return new WaitForSeconds(stopDuration);
+
+                // Rotate to the next direction
+                obj.transform.Rotate(Vector3.up, 90f);
+                directionIndex = (directionIndex + 1) % 4;
+            }
+        }
+    }
+
+    private void CheckClosestObject()
+    {
+        GameObject closestObject = null;
+        float closestDistance = float.MaxValue;
+
+        foreach (var obj in gameObjectsWithMeshes)
+        {
+            if (obj == null) continue;
+
+            float distance = Vector3.Distance(obj.transform.position, playerTransform.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestObject = obj;
+            }
+        }
+
+        if (closestObject != null && closestObject != currentClosestObject && closestDistance <= 3f)
+        {
+            currentClosestObject = closestObject;
+
+            int index = gameObjectsWithMeshes.IndexOf(currentClosestObject);
+            if (index >= 0 && index < collectibles.Count)
+            {
+                var selectedCollectible = collectibles[index];
+                InitializeGemini(selectedCollectible.Title, selectedCollectible.Description);
             }
         }
     }

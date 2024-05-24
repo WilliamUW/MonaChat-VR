@@ -27,6 +27,8 @@ public class Gemini : MonoBehaviour
     private List<Dictionary<string, object>> conversation = new List<Dictionary<string, object>>();
     private string geminiApiKey = "AIzaSyBxjY0ZtQ3Rw4xedwZIrCscne2PZxagCmc";
     private string url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent";
+    
+    // TODO: Add audio indicator for listening
 
     private bool isListening = false;
 
