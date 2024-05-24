@@ -18,11 +18,12 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
     private Dictionary<string, (Vector3 position, float scale)> positionScaleMap = new Dictionary<string, (Vector3 position, float scale)>()
     {
-        { "Statue of Liberty", (new Vector3(13, -16, 3), 0.5f) },
-        { "XB-21", (new Vector3(-2, 8f, -20), 0.2f) },
-        { "The Thinker", (new Vector3(-5, 1f, 0), 3f) },
-        { "Car", (new Vector3(0, 1f, 4), 1f) },
-        { "Mona Lisa", (new Vector3(5, 1.5f, 0), 1f) }
+        { "Statue of Liberty", (new Vector3(13, -18, 3), 0.5f) },
+        { "XB-21", (new Vector3(-2, 7f, -20), 0.2f) },
+        { "The Thinker", (new Vector3(-5, 0f, 0), 3f) },
+        { "Car", (new Vector3(5, 0.4f, 5), 1f) },
+        { "Mona Lisa", (new Vector3(5, 1.9f, 0), 1f) },
+        { "Santa Claus", (new Vector3(0, 0f, 5), 0.7f) }
     };
 
     private void Start()
@@ -185,7 +186,7 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
         while (true)
         {
-            if (Vector3.Distance(obj.transform.position, playerTransform.position) <= 3f)
+            if (Vector3.Distance(obj.transform.position, playerTransform.position) <= 4f)
             {
                 // Pause movement and face the player
                 Vector3 directionToPlayer = (playerTransform.position - obj.transform.position).normalized;
@@ -266,7 +267,7 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
             }
         }
 
-        if (closestObject != null && closestObject != currentClosestObject && closestDistance <= 3f)
+        if (closestObject != null && closestObject != currentClosestObject && closestDistance <= 4f)
         {
             Debug.Log($"Closest object: {closestObject.name} at distance: {closestDistance}");
             currentClosestObject = closestObject;
@@ -274,9 +275,13 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
             int index = gameObjectsWithMeshes.IndexOf(currentClosestObject);
             if (index >= 0 && index < collectibles.Count)
             {
-                var selectedCollectible = collectibles[index];
-                InitializeGemini(selectedCollectible.Title, selectedCollectible.Description);
+                collectiblesDropdown.value = (index);
+            }
+            else
+            {
+                Debug.LogError("Index out of range. Check if gameObjectsWithMeshes and collectibles lists are synchronized.");
             }
         }
     }
+
 }
