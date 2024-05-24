@@ -70,7 +70,19 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
                 var meshCollider = meshFilter.gameObject.AddComponent<MeshCollider>();
                 meshCollider.sharedMesh = meshFilter.sharedMesh;
                 meshCollider.convex = true;
-                meshFilter.gameObject.AddComponent<XRGrabInteractable>();
+                
+                // Ensure each child mesh also has an XRGrabInteractable
+                var childGrabInteractable = meshFilter.gameObject.GetComponent<XRGrabInteractable>();
+                if (childGrabInteractable == null)
+                {
+                    childGrabInteractable = meshFilter.gameObject.AddComponent<XRGrabInteractable>();
+                }
+
+                // Add OnSelect listener to log the name when grabbed
+                childGrabInteractable.onSelectEntered.AddListener((XRBaseInteractor interactor) =>
+                {
+                    Debug.Log($"Grabbed object: {meshFilter.gameObject.name}");
+                });
             }
         }
     }
