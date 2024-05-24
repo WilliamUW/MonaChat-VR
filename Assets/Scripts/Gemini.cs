@@ -71,7 +71,7 @@ public class Gemini : MonoBehaviour
     {
         if (isListening) return;
         isListening = true;
-        Speak("Listening.");
+        // Speak("Listening.");
         Debug.Log("Listen start");
         onClickMethod?.Invoke(clearButton, null);
         onClickMethod?.Invoke(textToSpeechStopButton, null);
@@ -83,7 +83,7 @@ public class Gemini : MonoBehaviour
     {
         if (!isListening) return;
         isListening = false;
-        Speak("Finished listening.");
+        // Speak("Finished listening.");
         Debug.Log("Listen end");
         string user_input = transcriptionText.text;
         AskGemini(user_input);

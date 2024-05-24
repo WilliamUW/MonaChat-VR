@@ -3813,7 +3813,7 @@ GameObject:
   - component: {fileID: 237237133}
   - component: {fileID: 237237132}
   m_Layer: 0
-  m_Name: MainController
+  m_Name: GeminiController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26138,6 +26138,7 @@ MonoBehaviour:
   - {fileID: 811379334}
   - {fileID: 1152600407}
   collectiblesDropdown: {fileID: 853429181}
+  gemini: {fileID: 237237132}
 --- !u!224 &1700917881 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1035790433963668018, guid: 085ce58b196caa446a8545c9dd388793, type: 3}

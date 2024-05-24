@@ -12,6 +12,8 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
     private List<CollectibleDto> collectibles; // Store the list of collectibles
 
+    public Gemini gemini;
+
     private Dictionary<string, (Vector3 position, float scale)> positionScaleMap = new Dictionary<string, (Vector3 position, float scale)>()
     {
         { "Statue of Liberty", (new Vector3(13, -16, 3), 0.5f) },
@@ -108,6 +110,7 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
     {
         // Implement your logic to initialize Gemini with the selected asset's title and description
         Debug.Log($"Initializing Gemini with Title: {title} and Description: {description}");
+        gemini.InitializeGemini("Name: " + title + ". Description: " + description);
     }
 
     public void AddCollidersAndInteractables()
