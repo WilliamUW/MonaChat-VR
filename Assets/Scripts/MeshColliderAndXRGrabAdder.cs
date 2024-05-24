@@ -16,12 +16,15 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
         "https://content.mona.gallery/y6l0ryaq-pjyl-fdj9-tlm1-xavgcotw.glb"
     };
 
+    List<CollectibleDto> collectibles;
+
     private void Start()
     {
     }
 
     public void LoadGltfAssetsAndAddComponents(List<CollectibleDto> collectibles)
     {
+        this.collectibles = collectibles;
         for (int i = 0; i < collectibles.Count; i++)
         {
             var gameObject = gameObjectsWithMeshes[i];
@@ -32,6 +35,7 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
             {
                 var gltf = gameObject.AddComponent<GltfAsset>();
                 gltf.Url = url;
+                gameObject.name = collectible.Title;
             }
         }
     }
@@ -44,10 +48,17 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
             if (parentObject == null) continue;
 
             // Add XRGrabInteractable to the parent object
-            if (parentObject.GetComponent<XRGrabInteractable>() == null)
+            var grabInteractable = parentObject.GetComponent<XRGrabInteractable>();
+            if (grabInteractable == null)
             {
-                parentObject.AddComponent<XRGrabInteractable>();
+                grabInteractable = parentObject.AddComponent<XRGrabInteractable>();
             }
+
+            // Add OnSelect listener to log the name when grabbed
+            grabInteractable.onSelectEntered.AddListener((XRBaseInteractor interactor) =>
+            {
+                Debug.Log($"Grabbed object: {parentObject.name}");
+            });
 
             // Find all MeshFilter components in the children
             var meshFilters = parentObject.GetComponentsInChildren<MeshFilter>();
