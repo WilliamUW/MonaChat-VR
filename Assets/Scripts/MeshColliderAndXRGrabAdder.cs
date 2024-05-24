@@ -66,7 +66,7 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
             if (gameObjectsWithMeshes == null || gameObjectsWithMeshes.Count <= i)
             {
                 Debug.LogError("Game objects with meshes list is null or does not contain enough items");
-                return;
+                continue;
             }
 
             var gameObject = gameObjectsWithMeshes[i];
