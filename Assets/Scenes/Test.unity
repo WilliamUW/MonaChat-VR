@@ -3168,7 +3168,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 237237132}
         m_TargetAssemblyTypeName: Gemini, Assembly-CSharp
-        m_MethodName: PalmUpEnd
+        m_MethodName: StopListening
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -28818,7 +28818,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7753147258609537286, guid: fa5ef3b56cfeb4f4ba855cdf2610a578, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PalmUpEnter
+      value: StartListening
       objectReference: {fileID: 0}
     - target: {fileID: 7753147258609537286, guid: fa5ef3b56cfeb4f4ba855cdf2610a578, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

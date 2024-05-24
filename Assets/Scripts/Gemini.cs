@@ -32,7 +32,7 @@ public class Gemini : MonoBehaviour
 
     private void Start()
     {
-        InitializeGemini("Pretend you are the Mona Lisa.");
+        InitializeGemini("Pretend you are the Statue of Liberty.");
     }
 
     public void InitializeGemini(string initialPrompt)
@@ -67,10 +67,31 @@ public class Gemini : MonoBehaviour
         onClickMethod?.Invoke(textToSpeechStartButton, null);
     }
 
-    public void UpdateCaptureButtonText(string s)
+    public void StartListening()
     {
-        Debug.Log(s);
+        if (isListening) return;
+        isListening = true;
+        Speak("Listening.");
+        Debug.Log("Listen start");
+        onClickMethod?.Invoke(clearButton, null);
+        onClickMethod?.Invoke(textToSpeechStopButton, null);
+        controller.ToggleActivation();
+        Debug.Log("Listening...");
     }
+
+    public void StopListening()
+    {
+        if (!isListening) return;
+        isListening = false;
+        Speak("Finished listening.");
+        Debug.Log("Listen end");
+        string user_input = transcriptionText.text;
+        AskGemini(user_input);
+        Debug.Log("Asking ... " + user_input);
+        controller.ToggleActivation();
+    }
+
+
 
     public async void AskGemini(string userQuery, bool resetConversation = false, bool announceQuestion = true)
     {
@@ -82,7 +103,6 @@ public class Gemini : MonoBehaviour
         {
             Speak("I heard: " + userQuery);
         }
-        var url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent";
 
         if (resetConversation)
         {
@@ -182,25 +202,4 @@ public class Gemini : MonoBehaviour
         }
     }
 
-    public void PalmUpEnter()
-    {
-        if (isListening) return;
-        isListening = true;
-        Debug.Log("Listen start");
-        onClickMethod?.Invoke(clearButton, null);
-        onClickMethod?.Invoke(textToSpeechStopButton, null);
-        controller.ToggleActivation();
-        Debug.Log("Listening...");
-    }
-
-    public void PalmUpEnd()
-    {
-        if (!isListening) return;
-        isListening = false;
-        Debug.Log("Listen end");
-        string user_input = transcriptionText.text;
-        AskGemini(user_input);
-        Debug.Log("Asking ... " + user_input);
-        controller.ToggleActivation();
-    }
 }
