@@ -47,7 +47,7 @@ public class Gemini : MonoBehaviour
                 { "role", "user" },
                 { "parts", new List<object>
                     {
-                        new { text = "Answer in first person as if you are without any prefix: " + initialPrompt },
+                        new { text = "Answer in first person without any prefix. You are: " + initialPrompt },
                     }
                 }
             },
@@ -56,7 +56,7 @@ public class Gemini : MonoBehaviour
                 { "role", "model" },
                 { "parts", new List<object>
                     {
-                        new { text = "Ok." },
+                        new { text = "Ok, I am: " + name },
                     }
                 }
             }
@@ -65,6 +65,8 @@ public class Gemini : MonoBehaviour
 
     public void Speak(string text)
     {
+        onClickMethod?.Invoke(clearButton, null);
+        onClickMethod?.Invoke(textToSpeechStopButton, null);
         Debug.Log("Speak: " + text);
         textToSpeechInputTextField.text = text;
         onClickMethod?.Invoke(textToSpeechStartButton, null);

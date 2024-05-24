@@ -12,6 +12,7 @@ Library: C:\Users\williamwang\GitHub\AssetStreaming\Temp\BurstOutput\tempburstli
 --assembly-defines=BouncyCastle.Crypto;
 --assembly-defines=endel.nativewebsocket;
 --assembly-defines=glTFast;
+--assembly-defines=Meta.Voice.Samples.BuiltInTimer;
 --assembly-defines=Meta.Voice.Samples.Dictation;
 --assembly-defines=Meta.Voice.Samples.TTSVoices;
 --assembly-defines=Meta.VoiceSDK.Mic.Common;
@@ -165,6 +166,7 @@ Library: C:\Users\williamwang\GitHub\AssetStreaming\Temp\BurstOutput\tempburstli
 --assembly-defines=BouncyCastle.Crypto;
 --assembly-defines=endel.nativewebsocket;
 --assembly-defines=glTFast;
+--assembly-defines=Meta.Voice.Samples.BuiltInTimer;
 --assembly-defines=Meta.Voice.Samples.Dictation;
 --assembly-defines=Meta.Voice.Samples.TTSVoices;
 --assembly-defines=Meta.VoiceSDK.Mic.Common;
@@ -272,6 +274,7 @@ Library: C:\Users\williamwang\GitHub\AssetStreaming\Temp\BurstOutput\tempburstli
 --assembly-defines=BouncyCastle.Crypto;
 --assembly-defines=endel.nativewebsocket;
 --assembly-defines=glTFast;
+--assembly-defines=Meta.Voice.Samples.BuiltInTimer;
 --assembly-defines=Meta.Voice.Samples.Dictation;
 --assembly-defines=Meta.Voice.Samples.TTSVoices;
 --assembly-defines=Meta.VoiceSDK.Mic.Common;

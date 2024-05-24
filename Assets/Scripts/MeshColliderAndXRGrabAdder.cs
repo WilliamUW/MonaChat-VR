@@ -100,7 +100,7 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
                 else
                 {
                     // Default position and scale
-                    gameObject.transform.position = new Vector3(0, 0f, 10);
+                    gameObject.transform.position = new Vector3(Random.Range(-5f, 5f), 0f, Random.Range(-10f, 10f));
                     gameObject.transform.localScale = Vector3.one;
                 }
             }
