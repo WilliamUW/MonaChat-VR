@@ -10,7 +10,7 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
     private Dictionary<string, (Vector3 position, float scale)> positionScaleMap = new Dictionary<string, (Vector3 position, float scale)>()
         {
             { "Statue of Liberty", (new Vector3(13, -16, 3), 0.5f) },
-            { "XB-21", (new Vector3(-2, 8f, -30), 0.2f) },
+            { "XB-21", (new Vector3(-2, 8f, -20), 0.2f) },
             { "The Thinker", (new Vector3(-5, 1f, 0), 3f) },
             { "Car", (new Vector3(0, 1f, 4), 1f) },
             { "Mona Lisa", (new Vector3(5, 1.5f, 0), 1f) }
