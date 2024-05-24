@@ -10,6 +10,8 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
     public List<GameObject> gameObjectsWithMeshes; // Assign this list with your game objects
     public TMP_Dropdown collectiblesDropdown; // Reference to the TMP Dropdown
 
+    private List<CollectibleDto> collectibles; // Store the list of collectibles
+
     private Dictionary<string, (Vector3 position, float scale)> positionScaleMap = new Dictionary<string, (Vector3 position, float scale)>()
     {
         { "Statue of Liberty", (new Vector3(13, -16, 3), 0.5f) },
@@ -19,12 +21,12 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
         { "Mona Lisa", (new Vector3(5, 1.5f, 0), 1f) }
     };
 
-    private void Start()
-    {
-    }
 
     public void LoadGltfAssetsAndAddComponents(List<CollectibleDto> collectibles)
     {
+        // Store the collectibles list for later use
+        this.collectibles = collectibles;
+
         // Debug: Ensure collectibles list is not null and contains expected items
         if (collectibles == null)
         {
@@ -89,6 +91,23 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
         // Add options to the dropdown
         collectiblesDropdown.AddOptions(dropdownOptions);
+        collectiblesDropdown.onValueChanged.AddListener(OnDropdownValueChanged);
+    }
+
+    private void OnDropdownValueChanged(int index)
+    {
+        Debug.Log($"Dropdown value changed: {index}");
+        if (collectibles != null && index >= 0 && index < collectibles.Count)
+        {
+            var selectedCollectible = collectibles[index];
+            InitializeGemini(selectedCollectible.Title, selectedCollectible.Description);
+        }
+    }
+
+    public void InitializeGemini(string title, string description)
+    {
+        // Implement your logic to initialize Gemini with the selected asset's title and description
+        Debug.Log($"Initializing Gemini with Title: {title} and Description: {description}");
     }
 
     public void AddCollidersAndInteractables()
