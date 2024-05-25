@@ -18,7 +18,7 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
     private Dictionary<string, (Vector3 position, float scale)> positionScaleMap = new Dictionary<string, (Vector3 position, float scale)>()
     {
-        { "Statue of Liberty", (new Vector3(13, -3.5, 3), 0.1f) },
+        { "Statue of Liberty", (new Vector3(13, -3.5f, 3), 0.1f) },
         { "XB-21", (new Vector3(-2, 7f, -10), 0.2f) },
         { "The Thinker", (new Vector3(-5, 0f, 5), 2f) },
         { "Car", (new Vector3(10, 0.4f, 15), 1f) },
@@ -31,8 +31,10 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
         { "Eiffel Tower", (new Vector3(-6, 0, -8), 0.05f) },
         { "Starry Night", (new Vector3(-10, 2, -8), 0.3f) },
         { "American Gothic", (new Vector3(2, 2.5f, -4), 0.4f) },
-{ "The Scream", (new Vector3(5, 1.5, -8), 2f) },
-
+        { "The Scream", (new Vector3(5, 1.5f, -8), 2f) },
+        { "Terratoca Army", (new Vector3(10, 5.2f, 16), 5f) },
+         { "Christ the Redeemer", (new Vector3(-5, 2f, -7), 0.4f) },
+         { "Moai Head", (new Vector3(5, 1.4f, 10), 3f) },
     };
 
     private string collectibleArtist = "Art";
