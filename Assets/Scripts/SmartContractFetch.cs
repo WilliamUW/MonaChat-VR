@@ -10,6 +10,7 @@ using Nethereum.Contracts;
 using Nethereum.ABI.FunctionEncoding.Attributes;
 using TMPro;
 using UnityEngine.Networking;
+using Monaverse.Api.Modules.Collectibles.Dtos;
 
 
 
@@ -25,11 +26,18 @@ public class MainController : MonoBehaviour
     private List<ArtworkRegistryService.ArtworkDTO> artworks;
     public TMP_Text artworkText;
 
+    public MeshColliderAndXRGrabAdder meshColliderAndXRGrabAdder;
+
     void Start()
     {
         artworkRegistryService = new ArtworkRegistryService(rpcUrl, contractAddress);
         artworks = new List<ArtworkRegistryService.ArtworkDTO>();
         StartCoroutine(FetchArtworksCoroutine());
+    }
+
+    public List<ArtworkRegistryService.ArtworkDTO> GetArtworks()
+    {
+        return artworks;
     }
 
     IEnumerator FetchArtworksCoroutine()
@@ -60,7 +68,9 @@ public class MainController : MonoBehaviour
             var artwork = getArtworkTask.Result;
             artworks.Add(artwork);
             Debug.Log($"Fetched Artwork {i}: {artwork.Name} {artwork.FileUrl} ({artwork.X}, {artwork.Y}, {artwork.Z}) {artwork.Size} {artwork.Description} {artwork.Prompt} ");
+            // Convert artworks to CollectibleDto and call LoadGltfAssetsAndAddComponents
         }
+        meshColliderAndXRGrabAdder.LoadGltfAssetsAndAddComponents(artworks);
     }
 }
 

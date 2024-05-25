@@ -11417,6 +11417,7 @@ GameObject:
   m_Component:
   - component: {fileID: 237237133}
   - component: {fileID: 237237132}
+  - component: {fileID: 237237134}
   m_Layer: 0
   m_Name: GeminiController
   m_TagString: Untagged
@@ -11457,6 +11458,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &237237134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237237131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b17c33305582045a72c64f03af6a8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  artworkText: {fileID: 0}
+  meshColliderAndXRGrabAdder: {fileID: 1697617336}
 --- !u!1001 &237341244
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -90102,7 +90117,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.6838385e+17, y: 81513660, z: 846584.2, w: -9.769697e-37}
+  m_BoundingSphereOverride: {x: 0, y: -1.42143985e-36, z: 9.14e-43, w: -4.555117e-39}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0

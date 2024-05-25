@@ -50,10 +50,32 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
     public void LoadGltfAssetsAndAddComponents(List<CollectibleDto> collectibles)
     {
-        // Store the collectibles list for later use
         this.collectibles = collectibles;
+        LoadGltfAssetsAndAddComponentsInternal();
+    }
 
-        // Debug: Ensure collectibles list is not null and contains expected items
+    public void LoadGltfAssetsAndAddComponents(List<ArtworkRegistryService.ArtworkDTO> artworks)
+    {
+        List<CollectibleDto> collectibles = new List<CollectibleDto>();
+        foreach (var artwork in artworks)
+        {
+            CollectibleDto collectible = new CollectibleDto
+            {
+                Title = artwork.Name,
+                Description = artwork.Description,
+                Nft = new CollectibleDto.CollectibleNft { IpfsUrl = artwork.FileUrl },
+                Versions = new List<CollectibleDto.CollectibleVersion> { new CollectibleDto.CollectibleVersion { Asset = artwork.FileUrl } }
+            };
+            // Add or update positionScaleMap with positions and scales
+            positionScaleMap[collectible.Title] = (new Vector3((float)artwork.X, (float)artwork.Y, (float)artwork.Z), (float)artwork.Size / 100);
+            collectibles.Add(collectible);
+        }
+        LoadGltfAssetsAndAddComponents(collectibles);
+    }
+
+    private void LoadGltfAssetsAndAddComponentsInternal()
+    {
+        // Ensure collectibles list is not null and contains expected items
         if (collectibles == null)
         {
             Debug.LogError("Collectibles list is null");
@@ -69,7 +91,6 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
         for (int i = 0; i < collectibles.Count; i++)
         {
-            // Debug: Ensure gameObjectsWithMeshes list is not null and contains expected items
             if (gameObjectsWithMeshes == null || gameObjectsWithMeshes.Count <= i)
             {
                 Debug.LogError("Game objects with meshes list is null or does not contain enough items");
@@ -82,43 +103,10 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
             // Add title to the dropdown options
             dropdownOptions.Add(collectible.Title);
 
-            // Debug: Print collectible details
-            Debug.Log($"Processing collectible: {collectible.Title} {collectible.Artist}");
+            Debug.Log($"Processing collectible: {collectible.Title}");
 
-            if (collectible.Artist != collectibleArtist)
-            {
-                Debug.Log($"Skip: {collectible.Title} {collectible.Artist}");
-                continue;
-            }
-
-            if (collectible.Versions == null || collectible.Versions.Count <= collectible.ActiveVersion)
-            {
-                Debug.LogError($"Collectible {collectible.Title} has invalid version data");
-                continue;
-            }
-
-            var url = collectible.Versions[collectible.ActiveVersion].Asset;
-
-            if (gameObject != null && !string.IsNullOrEmpty(url))
-            {
-                Debug.Log($"{collectible.Title} Loading GLTF asset: {url}");
-                var gltf = gameObject.AddComponent<GltfAsset>();
-                gltf.Url = url;
-                gameObject.name = collectible.Title;
-
-                // Set initial position and scale based on the title
-                if (positionScaleMap.TryGetValue(collectible.Title, out var positionScale))
-                {
-                    gameObject.transform.position = positionScale.position;
-                    gameObject.transform.localScale = Vector3.one * positionScale.scale;
-                }
-                else
-                {
-                    // Default position and scale
-                    gameObject.transform.position = new Vector3(Random.Range(-5f, 5f), 0f, Random.Range(-10f, 10f));
-                    gameObject.transform.localScale = Vector3.one;
-                }
-            }
+            // Load the GLTF asset and set properties
+            LoadGltfAsset(gameObject, collectible.Title, collectible.Description, collectible.Nft.IpfsUrl, positionScaleMap[collectible.Title].position, positionScaleMap[collectible.Title].scale);
         }
 
         // Add options to the dropdown
@@ -134,6 +122,21 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
             {
                 StartCoroutine(MoveRandomly(gameObject));
             }
+        }
+    }
+
+    private void LoadGltfAsset(GameObject gameObject, string title, string description, string assetUrl, Vector3 position, float scale)
+    {
+        if (gameObject != null && !string.IsNullOrEmpty(assetUrl))
+        {
+            Debug.Log($"{title} Loading GLTF asset: {assetUrl}");
+            var gltf = gameObject.AddComponent<GltfAsset>();
+            gltf.Url = assetUrl;
+            gameObject.name = title;
+
+            // Set initial position and scale based on the title
+            gameObject.transform.position = position;
+            gameObject.transform.localScale = Vector3.one * scale;
         }
     }
 
