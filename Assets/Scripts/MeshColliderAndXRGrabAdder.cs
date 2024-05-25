@@ -37,7 +37,7 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
          { "Moai Head", (new Vector3(5, 1.4f, 10), 3f) },
     };
 
-    private string collectibleArtist = "Art";
+    private string collectibleArtist = "William Wang";
 
     private void Start()
     {
@@ -56,6 +56,7 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
     public void LoadGltfAssetsAndAddComponents(List<ArtworkRegistryService.ArtworkDTO> artworks)
     {
+        collectibleArtist = "Art";
         List<CollectibleDto> collectibles = new List<CollectibleDto>();
         foreach (var artwork in artworks)
         {
@@ -105,8 +106,18 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
             Debug.Log($"Processing collectible: {collectible.Title}");
 
-            // Load the GLTF asset and set properties
-            LoadGltfAsset(gameObject, collectible.Title, collectible.Description, collectible.Nft.IpfsUrl, positionScaleMap[collectible.Title].position, positionScaleMap[collectible.Title].scale);
+            // Check if the title exists in the positionScaleMap dictionary
+            if (positionScaleMap.ContainsKey(collectible.Title))
+            {
+                // Load the GLTF asset and set properties using the position and scale from the dictionary
+                LoadGltfAsset(gameObject, collectible.Title, collectible.Description, collectible.Versions[0].Asset, positionScaleMap[collectible.Title].position, positionScaleMap[collectible.Title].scale);
+            }
+            else
+            {
+                // Load the GLTF asset and set properties with default position (0, 0, 0) and scale of 1
+                LoadGltfAsset(gameObject, collectible.Title, collectible.Description, collectible.Versions[0].Asset, new Vector3(Random.Range(-3f, 3f), 1, Random.Range(-10f, 10f)), 1f);
+            }
+
         }
 
         // Add options to the dropdown
