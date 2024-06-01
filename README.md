@@ -1,5 +1,7 @@
 # MonaChat VR
 
+Bringing blockchain assets to life! Chat and interact with all your favorite digital assets. 🧤
+
 Used Mona Unity SDK to:
 1. Connect wallet to Unity app in VR setting 
 2. Authorize wallet
