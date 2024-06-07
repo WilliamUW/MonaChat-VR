@@ -37,7 +37,7 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
          { "Moai Head", (new Vector3(5, 1.4f, 10), 3f) },
     };
 
-    private string collectibleArtist = "William Wang";
+    private string collectibleArtist = "Animals";
 
     private void Start()
     {
@@ -100,6 +100,11 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
             var gameObject = gameObjectsWithMeshes[i];
             var collectible = collectibles[i];
+
+            if (collectible.Artist != collectibleArtist)
+            {
+                continue;
+            }
 
             // Add title to the dropdown options
             dropdownOptions.Add(collectible.Title);
