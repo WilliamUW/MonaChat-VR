@@ -59,7 +59,7 @@ namespace WalletConnectUnity.Modal.Views
 
             var deviceType = DeviceUtils.GetDeviceType();
 
-            if ((deviceType is DeviceType.Desktop or DeviceType.Web && _showQrCodeOnDesktop) ||
+            if (true || (deviceType is DeviceType.Desktop or DeviceType.Web && _showQrCodeOnDesktop) ||
                 (deviceType is DeviceType.Tablet && _showQrCodeOnTablet))
             {
                 _qrCodeArea.gameObject.SetActive(true);
@@ -80,7 +80,7 @@ namespace WalletConnectUnity.Modal.Views
 
             base.Show(modal, effectCoroutine, options);
 
-#if (!UNITY_IOS && !UNITY_ANDROID)
+#if (!UNITY_IOS)
             await ShowQrCodeAndCopyButtonAsync();
 #else
             await GenerateUri();
