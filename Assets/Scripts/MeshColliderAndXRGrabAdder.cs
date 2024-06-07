@@ -42,7 +42,17 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
     public void LoadGltfAssetsAndAddComponents(List<CollectibleDto> collectibles)
     {
-        this.collectibles = collectibles;
+        List<CollectibleDto> filtered = new List<CollectibleDto>();
+        for (int i = 0; i < collectibles.Count; i++)
+        {
+            var collectible = collectibles[i];
+            if (collectible.Artist != collectibleArtist)
+            {
+                continue;
+            }
+            filtered.Add(collectible);
+        }
+        this.collectibles = filtered;
         LoadGltfAssetsAndAddComponentsInternal();
     }
 
