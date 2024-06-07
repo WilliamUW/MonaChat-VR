@@ -59,7 +59,7 @@ namespace WalletConnectUnity.Modal.Views
 
             var deviceType = DeviceUtils.GetDeviceType();
 
-            if (true || (deviceType is DeviceType.Desktop or DeviceType.Web && _showQrCodeOnDesktop) ||
+            if ((deviceType is DeviceType.Desktop or DeviceType.Web && _showQrCodeOnDesktop) ||
                 (deviceType is DeviceType.Tablet && _showQrCodeOnTablet))
             {
                 _qrCodeArea.gameObject.SetActive(true);
@@ -80,11 +80,11 @@ namespace WalletConnectUnity.Modal.Views
 
             base.Show(modal, effectCoroutine, options);
 
-// #if (!UNITY_IOS && !UNITY_ANDROID && false)
+#if (!UNITY_IOS && !UNITY_ANDROID)
             await ShowQrCodeAndCopyButtonAsync();
-// #else
-//             await GenerateUri();
-// #endif
+#else
+            await GenerateUri();
+#endif
 
             modal.Header.SetCustomLeftButton(_copyIconSprite, OnCopyLinkClick);
         }

@@ -1,11 +1,9 @@
 using System;
-using System.Threading.Tasks;
 using Monaverse.Api;
 using Monaverse.Core;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 namespace Monaverse.Examples
 {
@@ -27,8 +25,6 @@ namespace Monaverse.Examples
         [SerializeField] private GameObject _connectedState;
         [SerializeField] private GameObject _authorizedState;
 
-        // public MeshColliderAndXRGrabAdder meshColliderAndXRGrabAdder;
-
         private enum WalletState
         {
             Disconnected,
@@ -37,46 +33,85 @@ namespace Monaverse.Examples
             Authorized
         }
 
+        /// <summary>
+        /// Initializes the UI to the disconnected state on start.
+        /// </summary>
         private void Start()
         {
             SetUIState(WalletState.Disconnected);
+            
+            MonaverseManager.Instance.SDK.Connected += OnConnected;
+            MonaverseManager.Instance.SDK.Disconnected += OnDisconnected;
+            MonaverseManager.Instance.SDK.Authorized += OnAuthorized;
+            MonaverseManager.Instance.SDK.AuthorizationFailed += OnAuthorizationFailed;
+            MonaverseManager.Instance.SDK.ConnectionErrored += OnConnectionErrored;
+            MonaverseManager.Instance.SDK.SignMessageErrored += OnSignMessageErrored;
         }
 
-        private async Task TryConnect()
+        #region SDK Event Handlers
+        
+        private void OnSignMessageErrored(object sender, Exception exception)
         {
-            try
-            {
-                SetUIState(WalletState.Connecting);
-
-                await MonaverseManager.Instance.SDK.ConnectWallet();
-
-                Debug.Log("[MonaWalletConnectTest] Connected!");
-
-                SetUIState(WalletState.Connected);
-
-                if (MonaverseManager.Instance.SDK.IsWalletAuthorized())
-                {
-                    SetUIState(WalletState.Authorized);
-                    Debug.Log("[MonaWalletConnectTest] Wallet was already authorized!");
-                }
-            }
-            catch (Exception exception)
-            {
-                Debug.Log("[MonaWalletConnectTest] failed: " + exception);
-                SetUIState(WalletState.Disconnected);
-            }
+            Debug.LogError("[MonaWalletConnectTest] OnSignMessageErrored: " + exception.Message);
+            _authorizeButton.interactable = true;
         }
 
+        private void OnConnectionErrored(object sender, Exception exception)
+        {
+            Debug.LogError("[MonaWalletConnectTest] OnConnectionErrored: " + exception.Message);
+            _connectButton.interactable = true;
+        }
+
+        private void OnAuthorizationFailed(object sender, MonaWalletSDK.AuthorizationResult authorizationResult)
+        {
+            Debug.LogError("[MonaWalletConnectTest] OnAuthorizationFailed: " + authorizationResult);
+            _authorizeButton.interactable = true;
+        }
+
+        private void OnAuthorized(object sender, EventArgs e)
+        {
+            Debug.Log("[MonaWalletConnectTest.OnAuthorized]");
+            SetUIState(WalletState.Authorized);
+        }
+
+        private void OnConnected(object sender, string address)
+        {
+            Debug.Log("[MonaWalletConnectTest.OnConnected] address: " + address);
+            SetUIState(WalletState.Connected);
+        }
+
+        private void OnDisconnected(object sender, EventArgs e)
+        {
+            Debug.Log("[MonaWalletConnectTest.OnDisconnected]");
+            SetUIState(WalletState.Disconnected);
+        }
+        
+        #endregion
+        
         #region UI Click Events
 
+        /// <summary>
+        /// Handles the connect button click event to initiate wallet connection.
+        /// </summary>
         public async void OnConnectButton()
         {
             Debug.Log("[MonaWalletConnectTest] OnConnectButton");
             _connectButton.interactable = false;
 
-            await TryConnect();
+            try
+            {
+                SetUIState(WalletState.Connecting);
+                await MonaverseManager.Instance.SDK.ConnectWallet();
+            }
+            catch (Exception exception)
+            {
+                Debug.Log("[MonaWalletConnectTest] failed: " + exception);
+            }
         }
 
+        /// <summary>
+        /// Handles the disconnect button click event to disconnect the wallet.
+        /// </summary>
         public async void OnDisconnectButton()
         {
             Debug.Log("[MonaWalletConnectTest] OnDisconnectButton");
@@ -85,15 +120,17 @@ namespace Monaverse.Examples
             {
                 _disconnectButton.interactable = false;
                 await MonaverseManager.Instance.SDK.Disconnect();
-                SetUIState(WalletState.Disconnected);
             }
             catch (Exception e)
             {
                 _disconnectButton.interactable = true;
-                Debug.LogError("[MonaWalletConnectTest] Disconnect Exception: " + e);
+                Debug.LogError("[MonaWalletConnectTest] Disconnect Exception: " + e.Message);
             }
         }
 
+        /// <summary>
+        /// Handles the authorize button click event to authorize the connected wallet.
+        /// </summary>
         public async void OnAuthorizeWallet()
         {
             try
@@ -119,19 +156,20 @@ namespace Monaverse.Examples
             
                 _authorizeButton.interactable = true;
             
-                if(authorizationResult == MonaWalletSDK.AuthorizationResult.Authorized)
-                    SetUIState(WalletState.Authorized);
-
                 Debug.Log("[MonaWalletConnectTest] Authorization Result: " + resultText);
-                _resultLabel.text = resultText;
+                
+                if(authorizationResult != MonaWalletSDK.AuthorizationResult.Authorized)
+                    _resultLabel.text = resultText;
             }
             catch (Exception exception)
             {
-                _authorizeButton.interactable = true;
                 Debug.LogError("[MonaWalletConnectTest] AuthorizeWallet Exception: " + exception.Message);
             }
         }
         
+        /// <summary>
+        /// Handles the sign-out button click event to sign out from the Monaverse.
+        /// </summary>
         public void OnSignOut()
         {
             try
@@ -155,6 +193,10 @@ namespace Monaverse.Examples
             }
         }
 
+        /// <summary>
+        /// Handles the GetCollectibles button click event to get authorized wallet collectibles.
+        /// The wallet must be authorized first.
+        /// </summary>
         public async void OnGetCollectibles()
         {
             if (!MonaverseManager.Instance.SDK.IsWalletAuthorized())
@@ -174,38 +216,14 @@ namespace Monaverse.Examples
             }
 
             _resultLabel.text = "Success: wallet collectible count: " + getCollectiblesResult.Data.TotalCount;
-
-            // get vrm asset urls
-            Debug.Log(getCollectiblesResult.Data);
-            Debug.Log(getCollectiblesResult.Data.Data);
-            Debug.Log(getCollectiblesResult.Data.Data[0]);
-            List<string> vrmAssetUrls = new List<string>();
-            foreach (var collectible in getCollectiblesResult.Data.Data)
-            {
-                Debug.Log(collectible);
-                vrmAssetUrls.Add(collectible.Versions[collectible.ActiveVersion].Asset);
-                // const url = collectible.Versions[collectible.ActiveVersion].Asset;
-                // vrmAssetUrls.Add(url);
-            }
-
-            if (vrmAssetUrls.Count > 0)
-            {
-                _resultLabel.text += "\nVRM Assets:\n" + string.Join("\n", vrmAssetUrls);
-            }
-            else
-            {
-                _resultLabel.text += "\nNo VRM assets found.";
-            }
-
-            Debug.Log("[MonaWalletConnectTest] VRM Asset URLs: " + string.Join(", ", vrmAssetUrls));
-
-            var loader = GetComponent<MeshColliderAndXRGrabAdder>();
-                
-            loader.LoadGltfAssetsAndAddComponents(getCollectiblesResult.Data.Data);
         }
 
         #endregion
 
+        /// <summary>
+        /// Sets the UI state based on the current wallet state.
+        /// </summary>
+        /// <param name="state"></param>
         private void SetUIState(WalletState state)
         {
             _dappButtons.SetActive(false);
