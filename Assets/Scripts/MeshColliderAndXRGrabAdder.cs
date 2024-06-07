@@ -25,7 +25,7 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
     { "Debra the Dodo Bird", (new Vector3(0, 0, 0), 0.1f) },
     { "Kai the Koi Fish", (new Vector3(5, 0, 0), 0.1f) },
     { "Carl the Caribbean Reef Shark", (new Vector3(10, 0, 0), 1.5f) },
-    { "Willow the White Tiger", (new Vector3(15, 0, 0), 0.01f) },
+    { "Willow the White Tiger", (new Vector3(15, 0, 0), 0.02f) },
     { "Ellie the Elephant", (new Vector3(20, 0, 0), 0.06f) }
     };
 
