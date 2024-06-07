@@ -18,23 +18,15 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
     private Dictionary<string, (Vector3 position, float scale)> positionScaleMap = new Dictionary<string, (Vector3 position, float scale)>()
     {
-        { "Statue of Liberty", (new Vector3(13, -3.5f, 3), 0.1f) },
-        { "XB-21", (new Vector3(-2, 7f, -10), 0.2f) },
-        { "The Thinker", (new Vector3(-5, 0f, 5), 2f) },
-        { "Car", (new Vector3(10, 0.4f, 15), 1f) },
-        { "Mona Lisa", (new Vector3(5, 1.9f, 5), 1f) },
-        { "Santa Claus", (new Vector3(10, 0f, 5), 0.7f) },
-        { "Spongebob", (new Vector3(5, 0f, 5), 0.003f) },
-        { "Pikachu", (new Vector3(10, 0f, 5), 0.03f) },
-        { "Shrek", (new Vector3(15, 0f, 15), 0.01f) },
-        { "Mario", (new Vector3(10, 0f, 20), 0.3f) },
-        { "Eiffel Tower", (new Vector3(-6, 0, -8), 0.05f) },
-        { "Starry Night", (new Vector3(-10, 2, -8), 0.3f) },
-        { "American Gothic", (new Vector3(2, 2.5f, -4), 0.4f) },
-        { "The Scream", (new Vector3(5, 1.5f, -8), 2f) },
-        { "Terratoca Army", (new Vector3(10, 5.2f, 16), 5f) },
-         { "Christ the Redeemer", (new Vector3(-5, 2f, -7), 0.4f) },
-         { "Moai Head", (new Vector3(5, 1.4f, 10), 3f) },
+    { "Debra the Dodo Bird", (new Vector3(-20, 0, 0), 0.1f) },
+    { "Manny the Woolly Mammoth", (new Vector3(-15, 0, 0), 1.5f) },
+    { "Tara the Triceratops", (new Vector3(-10, 0, 0), 1f) },
+    { "Nicky the Nile Crocodile", (new Vector3(-5, 0, 0), 0.3f) },
+    { "Bella the Blue Whale", (new Vector3(0, 0, 0), 0.5f) },
+    { "Kai the Koi Fish", (new Vector3(5, 0, 0), 0.1f) },
+    { "Carl the Caribbean Reef Shark", (new Vector3(10, 0, 0), 1.5f) },
+    { "Willow the White Tiger", (new Vector3(15, 0, 0), 0.01f) },
+    { "Ellie the Elephant", (new Vector3(20, 0, 0), 0.06f) }
     };
 
     private string collectibleArtist = "Animals";
