@@ -18,11 +18,11 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
     private Dictionary<string, (Vector3 position, float scale)> positionScaleMap = new Dictionary<string, (Vector3 position, float scale)>()
     {
-    { "Debra the Dodo Bird", (new Vector3(-20, 0, 0), 0.1f) },
+    { "Bella the Blue Whale", (new Vector3(-20, 0, 0), 0.5f) },
     { "Manny the Woolly Mammoth", (new Vector3(-15, 0, 0), 1.5f) },
     { "Tara the Triceratops", (new Vector3(-10, 0, 0), 1f) },
     { "Nicky the Nile Crocodile", (new Vector3(-5, 0, 0), 0.3f) },
-    { "Bella the Blue Whale", (new Vector3(0, 0, 0), 0.5f) },
+    { "Debra the Dodo Bird", (new Vector3(0, 0, 0), 0.1f) },
     { "Kai the Koi Fish", (new Vector3(5, 0, 0), 0.1f) },
     { "Carl the Caribbean Reef Shark", (new Vector3(10, 0, 0), 1.5f) },
     { "Willow the White Tiger", (new Vector3(15, 0, 0), 0.01f) },
