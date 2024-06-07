@@ -25,8 +25,8 @@ public class Gemini : MonoBehaviour
     public TextMeshProUGUI transcriptionText; // Reference to the TextMeshPro UI component on the button
 
     private List<Dictionary<string, object>> conversation = new List<Dictionary<string, object>>();
-    private string geminiApiKey = "AIzaSyBxjY0ZtQ3Rw4xedwZIrCscne2PZxagCmc";
-    private string url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent";
+    private string geminiApiKey = "AIzaSyBY87LlScf_GUVyzZBc2lF-Rn_Tqw7sajc";
+    private string url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent";
     
     // TODO: Add audio indicator for listening
 
@@ -47,7 +47,7 @@ public class Gemini : MonoBehaviour
                 { "role", "user" },
                 { "parts", new List<object>
                     {
-                        new { text = "Answer in first person without any prefix. You are: " + initialPrompt },
+                        new { text = "Answer in first person without any prefix. You are: " + name + " . More information: " + initialPrompt },
                     }
                 }
             },
