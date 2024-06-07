@@ -15,18 +15,18 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
 
     private List<CollectibleDto> collectibles = new List<CollectibleDto>(); // Store the list of collectibles
     private GameObject currentClosestObject; // Track the current closest object
-
+    private const float defaultY = 0.15f; // Default Y position for the game objects
     private Dictionary<string, (Vector3 position, float scale)> positionScaleMap = new Dictionary<string, (Vector3 position, float scale)>()
     {
-    { "Bella the Blue Whale", (new Vector3(-20, 0, 0), 0.5f) },
-    { "Manny the Woolly Mammoth", (new Vector3(-15, 0, 0), 1.5f) },
-    { "Tara the Triceratops", (new Vector3(-10, 0, 0), 1f) },
-    { "Nicky the Nile Crocodile", (new Vector3(-5, 0, 0), 0.3f) },
-    { "Debra the Dodo Bird", (new Vector3(0, 0, 0), 0.1f) },
-    { "Kai the Koi Fish", (new Vector3(5, 0, 0), 0.1f) },
-    { "Carl the Caribbean Reef Shark", (new Vector3(10, 0, 0), 1.5f) },
-    { "Willow the White Tiger", (new Vector3(15, 0, 0), 0.02f) },
-    { "Ellie the Elephant", (new Vector3(20, 0, 0), 0.06f) }
+    { "Bella the Blue Whale", (new Vector3(-20, defaultY + 1.5f, 0), 0.5f) },
+    { "Manny the Woolly Mammoth", (new Vector3(-15, defaultY, 0), 1.5f) },
+    { "Tara the Triceratops", (new Vector3(-10, defaultY, 0), 1f) },
+    { "Nicky the Nile Crocodile", (new Vector3(-5, defaultY, 0), 0.3f) },
+    { "Debra the Dodo Bird", (new Vector3(0, defaultY + 0.4f, 0), 0.1f) },
+    { "Kai the Koi Fish", (new Vector3(5, defaultY, 0), 0.1f) },
+    { "Carl the Caribbean Reef Shark", (new Vector3(10, defaultY, 0), 1.5f) },
+    { "Willow the White Tiger", (new Vector3(15, defaultY, 0), 0.02f) },
+    { "Ellie the Elephant", (new Vector3(20, defaultY, 0), 0.06f) }
     };
 
     private string collectibleArtist = "Animals";
@@ -121,7 +121,7 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
             }
             else
             {
-                // Load the GLTF asset and set properties with default position (0, 0, 0) and scale of 1
+                // Load the GLTF asset and set properties with default position (0, defaultY, 0) and scale of 1
                 LoadGltfAsset(gameObject, collectible.Title, collectible.Description, collectible.Versions[0].Asset, new Vector3(Random.Range(-3f, 3f), 1, Random.Range(-10f, 10f)), 1f);
             }
 
@@ -296,8 +296,8 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
             if (obj == null) continue;
 
             // Calculate the distance on the x and z coordinates only
-            Vector3 objPositionXZ = new Vector3(obj.transform.position.x, 0, obj.transform.position.z);
-            Vector3 playerPositionXZ = new Vector3(playerTransform.position.x, 0, playerTransform.position.z);
+            Vector3 objPositionXZ = new Vector3(obj.transform.position.x, defaultY, obj.transform.position.z);
+            Vector3 playerPositionXZ = new Vector3(playerTransform.position.x, defaultY, playerTransform.position.z);
             float distance = Vector3.Distance(objPositionXZ, playerPositionXZ);
 
             if (distance < closestDistance)
