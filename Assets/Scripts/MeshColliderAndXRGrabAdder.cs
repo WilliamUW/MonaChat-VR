@@ -18,15 +18,15 @@ public class MeshColliderAndXRGrabAdder : MonoBehaviour
     private const float defaultY = 0.15f; // Default Y position for the game objects
     private Dictionary<string, (Vector3 position, float scale)> positionScaleMap = new Dictionary<string, (Vector3 position, float scale)>()
     {
-    { "Bella the Blue Whale", (new Vector3(-20, defaultY + 1.5f, -5), 0.5f) },
-    { "Manny the Woolly Mammoth", (new Vector3(-15, defaultY, 5), 1.5f) },
+    { "Bella the Blue Whale", (new Vector3(-20, defaultY + 1.5f, -10), 0.5f) },
+    { "Manny the Woolly Mammoth", (new Vector3(-15, defaultY, 10), 1.5f) },
     { "Tara the Triceratops", (new Vector3(-10, defaultY, 0), 1f) },
     { "Nicky the Nile Crocodile", (new Vector3(-5, defaultY, 0), 0.3f) },
     { "Debra the Dodo Bird", (new Vector3(0, defaultY + 0.4f, 0), 0.1f) },
     { "Kai the Koi Fish", (new Vector3(5, defaultY, 0), 0.1f) },
     { "Carl the Caribbean Reef Shark", (new Vector3(10, defaultY, 0), 1.5f) },
-    { "Willow the White Tiger", (new Vector3(15, defaultY, 0), 0.02f) },
-    { "Ellie the Elephant", (new Vector3(20, defaultY, -5), 0.06f) }
+    { "Willow the White Tiger", (new Vector3(15, defaultY, 5), 0.02f) },
+    { "Ellie the Elephant", (new Vector3(20, defaultY, -10), 0.06f) }
     };
 
     private string collectibleArtist = "Animals";
